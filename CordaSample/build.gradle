@@ -1,0 +1,92 @@
+buildscript {
+    ext {
+        corda_release_group = 'net.corda'
+        corda_release_version = '4.0'
+        corda_gradle_plugins_version = '4.0.41'
+        kotlin_version = '1.2.71'
+        quasar_version = '0.7.10'
+    }
+
+    dependencies {
+        classpath "net.corda.plugins:cordapp:$corda_gradle_plugins_version"
+        classpath "net.corda.plugins:cordformation:$corda_gradle_plugins_version"
+        classpath "net.corda.plugins:quasar-utils:$corda_gradle_plugins_version"
+    }
+
+}
+
+plugins {
+    id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.3.21'
+}
+
+group 'com.corda.samples'
+version '0.1.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    jcenter()
+    mavenCentral()
+    maven { url 'https://ci-artifactory.corda.r3cev.com/artifactory/corda' }
+    maven { url 'https://jitpack.io' }
+}
+
+apply plugin: 'net.corda.plugins.cordapp'
+apply plugin: 'net.corda.plugins.cordformation'
+apply plugin: 'net.corda.plugins.quasar-utils'
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    // Corda dependencies.
+    cordaCompile "$corda_release_group:corda-core:$corda_release_version"
+    cordaCompile "$corda_release_group:corda-node-api:$corda_release_version"
+    cordaRuntime "$corda_release_group:corda:$corda_release_version"
+
+    // Corda API dependencies.
+    cordaRuntime "$corda_release_group:corda-webserver:$corda_release_version"
+    cordaCompile "$corda_release_group:corda-webserver-impl:$corda_release_version"
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['jar']) {
+    directory "./build/nodes"
+    node {
+        name "O=Notary,L=Campinas,C=BR"
+        notary = [validating : false]
+        p2pPort 11001
+        rpcSettings {
+            address("localhost:10001")
+            adminAddress("localhost:10041")
+        }
+    }
+    node {
+        name "O=NodeA,L=São Paulo,C=BR"
+        p2pPort 11002
+        webPort 12002
+        rpcSettings {
+            address("localhost:10002")
+            adminAddress("localhost:10042")
+        }
+        rpcUsers = [[ user: "user1", "password": "test", "permissions": ["ALL"]]]
+    }
+    node {
+        name "O=NodeB,L=Campinas,C=BR"
+        p2pPort 11003
+        webPort 12003
+        rpcSettings {
+            address("localhost:10003")
+            adminAddress("localhost:10043")
+        }
+        rpcUsers = [[ user: "user2", "password": "test", "permissions": ["ALL"]]]
+    }
+}

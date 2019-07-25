@@ -21,14 +21,14 @@ object DebtSchemaV1 : MappedSchema(
     version = 1,
     mappedTypes = listOf(PersistentDebt::class.java)) {
     @Entity
-    @Table(name = "debt_states", indexes = [Index(name = "node1_idx", columnList="node1"), Index(name = "node2_idx", columnList="node2")])
+    @Table(name = "debt_states", indexes = [Index(name = "debtor_idx", columnList="debtor"), Index(name = "creditor_idx", columnList="creditor")])
     class PersistentDebt(
 
-        @Column(name = "node1")
-        var node1: Party,
+        @Column(name = "debtor")
+        var debtor: Party,
 
-        @Column(name = "node2")
-        var node2: Party
+        @Column(name = "creditor")
+        var creditor: Party
 
     ) : PersistentState() {}
 

@@ -13,14 +13,14 @@ data class DebtState(val debt: DebtModel,
                      override val linearId: UniqueIdentifier = UniqueIdentifier()
 ) : LinearState, QueryableState {
 
-    override val participants: List<AbstractParty> = listOf(debt.node1, debt.node2)
+    override val participants: List<AbstractParty> = listOf(debt.debtor, debt.creditor)
 
     override fun generateMappedObject(schema: MappedSchema): PersistentState {
 
         return when (schema) {
             is DebtSchemaV1 -> DebtSchemaV1.PersistentDebt(
-                this.debt.node1,
-                this.debt.node2
+                this.debt.debtor,
+                this.debt.creditor
             )
             else -> throw IllegalArgumentException("Unrecognised schema $schema")
         }

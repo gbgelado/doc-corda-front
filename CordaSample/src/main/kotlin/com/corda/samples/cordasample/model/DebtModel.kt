@@ -9,8 +9,8 @@ import java.time.Instant
 @CordaSerializable
 data class DebtModel(
     val date : Instant,
-    val node1 : Party,
-    val node2 : Party,
+    val debtor : Party,
+    val creditor : Party,
     val debtAmount : Double,
     val comment : String
 )

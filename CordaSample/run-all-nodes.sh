@@ -2,8 +2,8 @@
 
 # Executa todos os nós e todas as apis
 
-nodes=( "Notary" "NodeA" "NodeB" )
-apis=( "NodeA" "NodeB" )
+nodes=( "Notary" "NodeA" )
+apis=( "NodeA" )
 
 for i in "${nodes[@]}"
 do

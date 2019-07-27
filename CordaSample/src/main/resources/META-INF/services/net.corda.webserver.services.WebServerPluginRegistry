@@ -1,3 +1,6 @@
 # Register a ServiceLoader service extending from net.corda.webserver.services.WebServerPluginRegistry
 com.corda.samples.cordasample.plugin.PersonPlugin
 com.corda.samples.cordasample.plugin.EntityPlugin
+com.corda.samples.cordasample.plugin.TransactionPlugin
+com.corda.samples.cordasample.plugin.ChashInPlugin
+com.corda.samples.cordasample.plugin.ChashOutPlugin

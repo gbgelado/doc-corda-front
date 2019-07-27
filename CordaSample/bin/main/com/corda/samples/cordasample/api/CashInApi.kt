@@ -57,7 +57,6 @@ class CashInApi(private val rpcOps: CordaRPCOps) {
 }
 
 data class CreateRequestModelCashIn (
-    val name : String,
     val document : String,
     val amount : Double
 )

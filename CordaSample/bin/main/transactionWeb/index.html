@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>Pessoas</title>
+    <meta charset="utf-8">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+
+    <script src="js/api.js"></script>
+
+</head>
+<body>
+
+<div>
+    Criar Pessoa: <br>
+    Nome: <input text id="create-name" value="Joao"> <br>
+    Documento: <input text id="create-document" value="123.456.789-00"> <br>
+    <input type="button" value="Criar" onclick="createPerson()">
+</div>
+
+<br><br>
+
+<div>
+    Pessoas:
+    <table id="personTable" border="1">
+        <tr>
+            <th>Pessoa</th>
+        </tr>
+    </table>
+</div>
+
+
+<script>
+
+    $(document).ready(function() {
+
+        loadPeople();
+
+    });
+
+</script>
+
+
+</body>
+</html>

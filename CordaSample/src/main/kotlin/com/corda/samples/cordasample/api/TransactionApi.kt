@@ -15,11 +15,11 @@ import javax.ws.rs.Produces
 import javax.ws.rs.core.MediaType
 import javax.ws.rs.core.Response
 
-// GET: http://localhost:12002/api/entity/all
-// PUT: http://localhost:12002/api/entity/create
-// This API is accessible from /api/entity. All paths specified below are relative to it.
+// GET: http://localhost:12002/api/transaction/all
+// PUT: http://localhost:12002/api/transaction/create
+// This API is accessible from /api/transaction. All paths specified below are relative to it.
 
-@Path("entity")
+@Path("transaction")
 class TransactionApi(private val rpcOps: CordaRPCOps) {
 
     companion object {
@@ -45,7 +45,16 @@ class TransactionApi(private val rpcOps: CordaRPCOps) {
         return try {
 
             val signedTx = rpcOps.startTrackedFlow(::CreateTransactionFlow, data.origin, data.destiny, data.amount).returnValue.getOrThrow()
-            Response.status(Response.Status.CREATED).entity(signedTx.tx.outputs.single()).build()
+
+            val tx = signedTx.tx
+            val outputs = tx.outputs
+
+            logger.debug(outputs.toString())
+
+//            val res = "Ok"
+//            val res = outputs.single()
+
+            Response.status(Response.Status.CREATED).entity(outputs).build()
 
         } catch (ex: Throwable) {
 

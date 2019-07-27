@@ -15,9 +15,9 @@ import javax.ws.rs.Produces
 import javax.ws.rs.core.MediaType
 import javax.ws.rs.core.Response
 
-// GET: http://localhost:12002/api/cashin/all
-// PUT: http://localhost:12002/api/cashin/create
-// This API is accessible from /api/cashin. All paths specified below are relative to it.
+// GET: http://localhost:12002/api/cashout/all
+// PUT: http://localhost:12002/api/cashout/create
+// This API is accessible from /api/cashout. All paths specified below are relative to it.
 
 @Path("cashout")
 class CashOutApi(private val rpcOps: CordaRPCOps) {
@@ -57,7 +57,6 @@ class CashOutApi(private val rpcOps: CordaRPCOps) {
 }
 
 data class CreateRequestModelCashOut (
-    val name : String,
     val document : String,
     val amount : Double
 )

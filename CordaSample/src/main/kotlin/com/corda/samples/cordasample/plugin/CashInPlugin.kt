@@ -16,7 +16,7 @@ class CashInPlugin : WebServerPluginRegistry {
      */
     override val staticServeDirs = mapOf(
         // This will serve the accountWeb2 directory in resources to /web/example
-        "entity" to javaClass.classLoader.getResource("cashInWeb").toExternalForm()
+        "cashin" to javaClass.classLoader.getResource("cashInWeb").toExternalForm()
     )
 
 }

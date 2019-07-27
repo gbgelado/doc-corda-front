@@ -2,5 +2,5 @@
 com.corda.samples.cordasample.plugin.PersonPlugin
 com.corda.samples.cordasample.plugin.EntityPlugin
 com.corda.samples.cordasample.plugin.TransactionPlugin
-com.corda.samples.cordasample.plugin.ChashInPlugin
-com.corda.samples.cordasample.plugin.ChashOutPlugin
+com.corda.samples.cordasample.plugin.CashInPlugin
+com.corda.samples.cordasample.plugin.CashOutPlugin

@@ -108,13 +108,10 @@ object CreateTransaction {
                 TransactionContract.Commands.CreateTransaction(),
                 transactionState.participants.map { it.owningKey }
             )
+
             val txOriginUpdateCommand = Command(
                 EntityContract.Commands.UpdateEntity(),
                 originState.participants.map { it.owningKey }
-            )
-            val txDestinyUpdateCommand = Command(
-                EntityContract.Commands.UpdateEntity(),
-                destinyState.participants.map { it.owningKey }
             )
 
             progressTracker.currentStep = BUILDING
@@ -126,7 +123,6 @@ object CreateTransaction {
             val txBuilder = TransactionBuilder(notary)
                 .addCommand(txCommand)
                 .addCommand(txOriginUpdateCommand)
-                .addCommand(txDestinyUpdateCommand)
                 .addInputState(originStateRef)
                 .addInputState(destinyStateRef)
                 .addOutputState(transactionState, TransactionContract::class.java.canonicalName)

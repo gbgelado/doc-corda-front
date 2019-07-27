@@ -37,6 +37,8 @@ class EntityContract : Contract {
     private fun verifyUpdateEntity(tx: LedgerTransaction){
 
         requireThat {
+            val inputList = tx.inputsOfType<EntityState>()
+            "É necessário ter dois inputs" using (inputList.size == 2)
         }
 
     }

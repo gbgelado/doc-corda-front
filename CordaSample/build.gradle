@@ -70,7 +70,7 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['jar']) {
         }
     }
     node {
-        name "O=NodeA,L=São Paulo,C=BR"
+        name "O=NodeA,L=Sãxo Paulo,C=BR"
         p2pPort 11002
         webPort 12002
         rpcSettings {

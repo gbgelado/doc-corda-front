@@ -29,7 +29,7 @@ class TransactionContract : Contract {
             " Transacao deve ter um documento de origem e um de destino " using ( inputs.size == 2 )
 
             val outputs = tx.outputsOfType<EntityState>()
-            " Transacao deve resultar em um documento de origem e um de destino " using ( outputs.size == 2 )
+            " Transacao deve resultar em um documento de origem e um de destino " using ( outputs.size == 3 )
 
             val origin = inputs[0].entity
             " Origem tem saldo " using ( origin.amount > 0 )

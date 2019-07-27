@@ -15,6 +15,7 @@ class EntityContract : Contract {
 
         when (command.value) {
             is Commands.CreateEntity -> verifyCreateEntity(tx)
+            is Commands.UpdateEntity -> verifyUpdateEntity(tx)
             else -> throw IllegalArgumentException("Command not found")
         }
 
@@ -31,8 +32,15 @@ class EntityContract : Contract {
         }
 
     }
+    private fun verifyUpdateEntity(tx: LedgerTransaction){
+
+        requireThat {
+        }
+
+    }
 
     interface Commands : CommandData {
         class CreateEntity : Commands
+        class UpdateEntity : Commands
     }
 }
